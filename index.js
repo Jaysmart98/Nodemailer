@@ -1,21 +1,34 @@
-const express = require('express');
-const app = express();
-const dotenv = require('dotenv');
-dotenv.config();
-const port = process.env.PORT || 5200;
-const Mailer = require('./controllers/sendMail');
-const texted = require('./controllers/indexx');
-const imgs = require('./controllers/ourImages');
+const express = require('express')
+const app = require('express')()
+require('dotenv').config()
 
 
-const bodyParser = require('body-parser');
-app.use(express.json()); // post request
-app.use(bodyParser.urlencoded({ extended: true }));
+const multer = require('multer')
+const upload = multer({ dest: 'uploads/'})
 
-const nodemailer = require('nodemailer');
+const bodyParser = require('body-parser')
 
-app.get('/mail', Mailer);
+const Mailer = require('./controllers/sendMail')
+const clientSide = require('./controllers/clients')
+
+require('ejs')
+app.set('view engine', 'ejs')
+app.use(express.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+
+const port = process.env.PORT || 5400
+const URI = process.env.uri || undefined
 
 
 
-app.listen(port, () => console.log(`Server started at port: ${port}`));
+
+app.get('/files', (req,res)=>{
+    res.render('pages/upload')
+})
+app.get('/mail', Mailer)
+app.post('/upload', upload.single('media'), clientSide)
+
+
+app.listen(port, () => {
+    console.log(`server started at port: ${port}`);
+})
