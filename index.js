@@ -22,10 +22,11 @@ const URI = process.env.uri || undefined
 
 
 
-app.get('/files', (req,res)=>{
+app.get('/files', (req, res)=>{
     res.render('pages/upload')
 })
 app.get('/mail', Mailer)
+
 app.post('/upload', upload.single('media'), clientSide)
 
 
