@@ -1,8 +1,10 @@
 <%- include('../partials/navbar') %>
 <div class="col-lg-7 col-10 mx-auto p-lg-4 p-3 rounded-2 shadow">
-    <h3 class="text-center text-decoration-underline my-2">Sign Up</h3>
+    <h1 class="text-center text-decoration-underline my-2">Upload a picture below</h1>
+   
     <form action="/upload" method="post" enctype="multipart/form-data">
-        <input id="media" name="media" required type="file" class="form-control shadow-none my-3" placeholder="Password">
+        <input id="media" name="media" required type="file" class="form-control shadow-none my-3" placeholder="Please select a file" accept="image/*,video/*,audio/*">
+        <input id="title" name="title" required type="text" class="form-control shadow-none my-3" placeholder="Please enter a title">
         <button type="submit" class="my-4 btn btn-dark w-100">Submit</button>
     </form>
 </div>

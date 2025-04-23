@@ -1,4 +1,4 @@
-import nodemailer from 'nodemailer';
+const nodemailer = require('nodemailer');
 require('dotenv').config();
 
 const sendMail = (req, res) => {
